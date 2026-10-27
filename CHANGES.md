@@ -91,4 +91,36 @@ This document maintains a continuous, detailed record of all theme features, liq
 
 ---
 
-*Last Updated: August 12, 2026*
+## 📈 GSC First Wave (27 Oct 2026) — Search Console CTR / striking-distance
+
+Source: `divyaprabhafoods.com-Performance-on-Search-2026-10-27` export (Pages.csv is source of truth).
+
+**Theme SERP overrides** in [`layout/theme.liquid`](layout/theme.liquid) for:
+- Articles: `gorkeri-pickle-health`, `top-10-homemade-pickles-in-india`, gut-health post
+- Collections: `pickles`, `best-pickle-brands-in-india`, `tangyspicy-pickle`, `homemade-pickles`, `organic-pickles`
+- Products: Gor Keri, Meethi Keri, Methia Keri, traditional mango pickle
+
+**On-page**: [`sections/dp-article.liquid`](sections/dp-article.liquid) display titles + Gor Keri answer block + product CTA; collection intro fallbacks in [`sections/custom-collection-with-filters.liquid`](sections/custom-collection-with-filters.liquid).
+
+**Admin API apply** (titles, metas, collection body intros, article body prepend):
+```bash
+# Partner apps do not show shpat_ in the UI — exchange Client ID + secret first:
+export SHOPIFY_CLIENT_ID=...
+export SHOPIFY_CLIENT_SECRET=shpss_...
+python3 scratch/shopify_get_access_token.py   # prints shpat_… (~24h TTL)
+export SHOPIFY_ACCESS_TOKEN='shpat_…'
+python3 scratch/push_gsc_first_wave.py
+```
+
+**Postman (remember for all Divyaprabha Partner apps):**
+- `POST https://divyaprabhafoods.myshopify.com/admin/oauth/access_token`
+- Body x-www-form-urlencoded: `grant_type=client_credentials`, `client_id`, `client_secret`
+- Use response `access_token` as `X-Shopify-Access-Token`
+
+Fact rules respected: peanut oil for Gor Keri/mango; sugar (not jaggery) for Meethi Keri; no certified-organic claim on `organic-pickles`; no probiotic/benefits claims in new copy.
+
+**Live applied 27 Oct 2026:** theme assets pushed; 3 articles + 4 products updated via Admin API; collection SERP/intros served from theme overrides (Admin REST cannot see those collection IDs).
+
+---
+
+*Last Updated: October 27, 2026*

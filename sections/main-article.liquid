@@ -52,14 +52,22 @@
               </script>
               <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
             </div>
+            {%- assign dp_article_display_title = article.title -%}
+            {%- if article.handle == 'gorkeri-pickle-health' -%}
+              {%- assign dp_article_display_title = 'Gor Keri Meaning: Sweet Jaggery Mango Pickle' -%}
+            {%- elsif article.handle == 'top-10-homemade-pickles-in-india' -%}
+              {%- assign dp_article_display_title = 'Top 10 Homemade Pickles in India' -%}
+            {%- elsif article.handle == 'are-traditional-indian-pickles-good-for-gut-health-the-hidden-probiotic-benefits-of-sun-cured-achaar' -%}
+              {%- assign dp_article_display_title = 'Are Traditional Indian Pickles Worth It?' -%}
+            {%- endif -%}
             <div class="cms-group-title ">
               <div class="article-title">
                 <a
                   class="h2"
                   href="{{ article.url}}"
-                  title="{{ article.title }}"
+                  title="{{ dp_article_display_title }}"
                   class="post-title">
-                  {{- article.title -}}
+                  {{- dp_article_display_title -}}
                 </a>
               </div>
             </div>

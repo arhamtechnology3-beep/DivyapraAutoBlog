@@ -1,0 +1,38 @@
+name: GSC First Wave SEO Apply
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "If true, only validate copy lengths (no Shopify writes)"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+concurrency:
+  group: gsc-first-wave-seo
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Dry-run validate
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        run: python3 scratch/gsc_first_wave_seo.py --dry-run
+      - name: Push theme + apply SEO
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        env:
+          SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
+          SHOPIFY_SHOP_URL: "https://divyaprabhafoods.myshopify.com"
+          SHOPIFY_BLOG_ID: "97942077654"
+          SHOPIFY_THEME_ID: "161791869142"
+        run: python3 scratch/push_gsc_first_wave.py

@@ -1039,6 +1039,40 @@
       <div class="dp-collection-seo-content" style="margin-bottom: 32px;">
         {{ collection.description }}
       </div>
+    {% else %}
+      {%- comment -%} GSC first-wave intro-only fallbacks (no H2/H3 — keep admin descriptions intro-only too) {%- endcomment -%}
+      {%- assign dp_col_intro = '' -%}
+      {%- if collection.handle == 'pickles' -%}
+        {%- capture dp_col_intro -%}
+          <p><strong>Gujarati pickles</strong> from Divyaprabha Foods are small-batch Saurashtra achar made with Baa's recipe since 1980 — Gor Keri, Methia Keri, Gunda Keri, and more. No vinegar, no sodium benzoate; 12-month shelf life.</p>
+          <p>Shop the jars above, or start with <a href="/products/gor-keri-pickle-jaggery-mango-achar-gujarati">Gor Keri (jaggery mango achar)</a>.</p>
+        {%- endcapture -%}
+      {%- elsif collection.handle == 'best-pickle-brands-in-india' -%}
+        {%- capture dp_col_intro -%}
+          <p>Shoppers comparing the <strong>best pickle brands in India</strong> want clear ingredients and a real regional recipe. Divyaprabha Foods makes homemade Gujarati achar in Saurashtra — small batches, no preservatives.</p>
+          <p>Browse the jars above, or go straight to <a href="/products/gor-keri-pickle-jaggery-mango-achar-gujarati">Gor Keri</a> and <a href="/products/mango-pickle-traditional-keri-achar-gujarati">traditional mango pickle</a>.</p>
+        {%- endcapture -%}
+      {%- elsif collection.handle == 'tangyspicy-pickle' -%}
+        {%- capture dp_col_intro -%}
+          <p><strong>Tangy spicy pickles</strong> from Divyaprabha Foods bring Saurashtra heat and sour mango bite — Methia Keri, Gunda Keri, and classic mango achar. Mustard or peanut oil by recipe; never palm oil or vinegar.</p>
+          <p>Order from the jars above, including <a href="/products/chana-keri-methi-pickle-gujarati-methia-achar">Methia Keri</a>.</p>
+        {%- endcapture -%}
+      {%- elsif collection.handle == 'homemade-pickles' -%}
+        {%- capture dp_col_intro -%}
+          <p><strong>Homemade pickles</strong> at Divyaprabha Foods follow Baa's Saurashtra kitchen method: hand-cut fruit, sun-curing, and spice by spice — not factory vinegar brine. Shelf life 12 months when kept dry and cool.</p>
+          <p>Start with <a href="/products/gor-keri-pickle-jaggery-mango-achar-gujarati">Gor Keri</a> or <a href="/products/mango-pickle-traditional-keri-achar-gujarati">aam ka achar</a>.</p>
+        {%- endcapture -%}
+      {%- elsif collection.handle == 'organic-pickles' -%}
+        {%- capture dp_col_intro -%}
+          <p>Looking for <strong>natural pickles</strong> without synthetic preservatives? Divyaprabha Foods jars use traditional Saurashtra recipes — no sodium benzoate, no vinegar, no palm oil. We do not claim certified-organic status.</p>
+          <p>Shop the jars above for small-batch Gujarati achar shipped from our kitchen.</p>
+        {%- endcapture -%}
+      {%- endif -%}
+      {%- if dp_col_intro != blank -%}
+        <div class="dp-collection-seo-content" style="margin-bottom: 32px;">
+          {{ dp_col_intro }}
+        </div>
+      {%- endif -%}
     {% endif %}
 
     {%- comment -%} 2. DYNAMIC COLLECTION FAQ ENGINE (Tailored per collection title/handle) {%- endcomment -%}
