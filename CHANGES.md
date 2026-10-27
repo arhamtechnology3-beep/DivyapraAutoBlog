@@ -91,4 +91,26 @@ This document maintains a continuous, detailed record of all theme features, liq
 
 ---
 
-*Last Updated: August 12, 2026*
+## 📈 GSC First Wave (27 Oct 2026) — Search Console CTR / striking-distance
+
+Source: `divyaprabhafoods.com-Performance-on-Search-2026-10-27` export (Pages.csv is source of truth).
+
+**Theme SERP overrides** in [`layout/theme.liquid`](layout/theme.liquid) for:
+- Articles: `gorkeri-pickle-health`, `top-10-homemade-pickles-in-india`, gut-health post
+- Collections: `pickles`, `best-pickle-brands-in-india`, `tangyspicy-pickle`, `homemade-pickles`, `organic-pickles`
+- Products: Gor Keri, Meethi Keri, Methia Keri, traditional mango pickle
+
+**On-page**: [`sections/dp-article.liquid`](sections/dp-article.liquid) display titles + Gor Keri answer block + product CTA; collection intro fallbacks in [`sections/custom-collection-with-filters.liquid`](sections/custom-collection-with-filters.liquid).
+
+**Admin API apply** (titles, metas, collection body intros, article body prepend):
+```bash
+export SHOPIFY_ACCESS_TOKEN=shpat_...
+python3 scratch/push_gsc_first_wave.py
+# or workflow_dispatch: .github/workflows/gsc_first_wave_seo.yml
+```
+
+Fact rules respected: peanut oil for Gor Keri/mango; sugar (not jaggery) for Meethi Keri; no certified-organic claim on `organic-pickles`; no probiotic/benefits claims in new copy.
+
+---
+
+*Last Updated: October 27, 2026*
