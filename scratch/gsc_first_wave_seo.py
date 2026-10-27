@@ -300,8 +300,13 @@ def update_collections(dry_run: bool) -> None:
         except RuntimeError as e:
             if "404" not in str(e):
                 raise
-            request("PUT", f"smart_collections/{cid}.json", payload_smart)
-            print(f"  ✓ smart_collection {cid}")
+            try:
+                request("PUT", f"smart_collections/{cid}.json", payload_smart)
+                print(f"  ✓ smart_collection {cid}")
+            except RuntimeError as e2:
+                # Some storefront collections are not writable via Admin REST for this
+                # app; theme SERP overrides in layout/theme.liquid still apply.
+                print(f"  ⚠ skipped Admin collection update ({handle}): {e2}")
 
 
 def update_products(dry_run: bool) -> None:

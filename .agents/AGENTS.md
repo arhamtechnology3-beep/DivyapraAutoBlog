@@ -14,6 +14,25 @@ Before generating, editing, or publishing any blog post, theme feature, or code 
 
 ---
 
+## 🔑 Shopify Admin API token (Partner apps — remember for every project)
+
+Partner / Dev Dashboard apps (**AutoBlog**, **Cursor SEO**, etc.) do **not** show a permanent `shpat_` in the Shopify UI. Always exchange **Client ID + Client secret** via client-credentials:
+
+**Postman / curl**
+- Method: `POST`
+- URL: `https://divyaprabhafoods.myshopify.com/admin/oauth/access_token`
+- Headers: `Content-Type: application/x-www-form-urlencoded`, `Accept: application/json`
+- Body (x-www-form-urlencoded):
+  - `grant_type` = `client_credentials`
+  - `client_id` = from `dev.shopify.com` → Apps → app → **Settings → Credentials**
+  - `client_secret` = `shpss_…` from the same page
+- Response `access_token` is `shpat_…` (typically ~24h TTL). Re-run when expired.
+- Helper: `scratch/shopify_get_access_token.py`
+
+Never paste Client secrets or `shpat_` into chat. Prefer Cursor/GitHub secrets.
+
+---
+
 ## 🎯 9 Mandatory Execution Rules
 
 1. **Verify Workspace Folder & Target Theme First:** Check current path `/Users/apple/Documents/Shopify Theme VS code/DivyaPrabha Food` and ensure all updates post ONLY to `divyaprabhafoods.com` live theme. Never leak changes to `The Pickle Affair`.

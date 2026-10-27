@@ -104,12 +104,22 @@ Source: `divyaprabhafoods.com-Performance-on-Search-2026-10-27` export (Pages.cs
 
 **Admin API apply** (titles, metas, collection body intros, article body prepend):
 ```bash
-export SHOPIFY_ACCESS_TOKEN=shpat_...
+# Partner apps do not show shpat_ in the UI — exchange Client ID + secret first:
+export SHOPIFY_CLIENT_ID=...
+export SHOPIFY_CLIENT_SECRET=shpss_...
+python3 scratch/shopify_get_access_token.py   # prints shpat_… (~24h TTL)
+export SHOPIFY_ACCESS_TOKEN='shpat_…'
 python3 scratch/push_gsc_first_wave.py
-# or workflow_dispatch: .github/workflows/gsc_first_wave_seo.yml
 ```
 
+**Postman (remember for all Divyaprabha Partner apps):**
+- `POST https://divyaprabhafoods.myshopify.com/admin/oauth/access_token`
+- Body x-www-form-urlencoded: `grant_type=client_credentials`, `client_id`, `client_secret`
+- Use response `access_token` as `X-Shopify-Access-Token`
+
 Fact rules respected: peanut oil for Gor Keri/mango; sugar (not jaggery) for Meethi Keri; no certified-organic claim on `organic-pickles`; no probiotic/benefits claims in new copy.
+
+**Live applied 27 Oct 2026:** theme assets pushed; 3 articles + 4 products updated via Admin API; collection SERP/intros served from theme overrides (Admin REST cannot see those collection IDs).
 
 ---
 
