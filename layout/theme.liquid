@@ -116,6 +116,9 @@
   {% render 'meta-tags' %}
   {% render 'store-json-ld' %}
   {% render 'collection-json-ld' %}
+  {%- if template.name == 'index' -%}
+    {{ 'dp-diwali.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
   {% render 'faq-json-ld' %}
   {%- if settings.favicon != blank %}<link rel="shortcut icon" type="image/png" href="{{ settings.favicon | img_url: '32x' }}">{% endif -%}
   {%- if settings.favicon_apple != blank %}<link rel="apple-touch-icon-precomposed" type="image/png" sizes="152x152" href="{{ settings.favicon_apple | img_url: '152x' }}">{% endif -%}
@@ -1161,6 +1164,9 @@
               {% endif %}
         {% endcase %}
     </header>
+  {%- if template.name == 'index' -%}
+    {% render 'dp-diwali' %}
+  {%- endif -%}
   <div class="main {{class_sidebar}}" style="transform: none;">
     {% if template contains 'product' %} 
     	{% section 'breadcrumb' %}

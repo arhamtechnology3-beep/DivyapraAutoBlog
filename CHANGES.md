@@ -123,4 +123,19 @@ Fact rules respected: peanut oil for Gor Keri/mango; sugar (not jaggery) for Mee
 
 ---
 
-*Last Updated: October 27, 2026*
+## 🪔 Homepage Diwali Hero Restore (28 Oct 2026)
+
+Pushing `layout/theme.liquid` for GSC first-wave SEO overwrote the live-only Diwali include. Assets (`snippets/dp-diwali.liquid`, `assets/dp-diwali.css`, jar PNGs) were still on theme `#161791869142` but not rendered.
+
+**Restore (homepage only):**
+- `<head>`: `{{ 'dp-diwali.css' | asset_url | stylesheet_tag }}` when `template.name == 'index'`
+- After `</header>`: `{% render 'dp-diwali' %}` when `template.name == 'index'`
+- Snippet JS inserts the hanging-jar hero before the default slideshow and hides it
+
+**Backup:** theme duplicate `Backup before hero restore 28 Oct 2026` (`#189471064278`).
+
+**Live verified 28 Oct 2026:** Happy Diwali hero + hanging jars on `divyaprabhafoods.com`; collection/product SEO titles still intact.
+
+---
+
+*Last Updated: October 28, 2026*

@@ -1,0 +1,802 @@
+/* Colored bulbs hanging just under the header, blinking in three groups. */
+.header-top {
+  overflow: visible;
+}
+
+.dp-header-lights {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -16px;
+  height: 18px;
+  z-index: 30;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.dp-header-lights__track {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  padding: 0 6px;
+}
+
+.dp-header-lights__track::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-bottom: 1.5px solid #2d3748;
+  opacity: 0.7;
+}
+
+.dp-hlight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 0;
+  max-width: 22px;
+}
+
+.dp-hlight i {
+  width: 4px;
+  height: 3px;
+  background: #1a202c;
+  border-radius: 1px 1px 0 0;
+}
+
+.dp-hlight b {
+  width: 9px;
+  height: 13px;
+  margin-top: -1px;
+  border-radius: 50% / 35% 35% 65% 65%;
+}
+
+.dp-hlight--gold b {
+  background: radial-gradient(circle at 35% 35%, #fffde7 0%, #ffd700 50%, #f59e0b 100%);
+  color: #ffd700;
+  box-shadow: 0 0 6px #ffd700, 0 0 14px #f59e0b;
+}
+
+.dp-hlight--red b {
+  background: radial-gradient(circle at 35% 35%, #ffebee 0%, #ff1744 50%, #b71c1c 100%);
+  color: #ff1744;
+  box-shadow: 0 0 6px #ff1744, 0 0 14px #b71c1c;
+}
+
+.dp-hlight--green b {
+  background: radial-gradient(circle at 35% 35%, #e8f8f5 0%, #00e676 50%, #00a854 100%);
+  color: #00e676;
+  box-shadow: 0 0 6px #00e676, 0 0 14px #00a854;
+}
+
+.dp-hlight--cyan b {
+  background: radial-gradient(circle at 35% 35%, #e1f5fe 0%, #00b0ff 50%, #0077c2 100%);
+  color: #00b0ff;
+  box-shadow: 0 0 6px #00b0ff, 0 0 14px #0077c2;
+}
+
+.dp-hlight--orange b {
+  background: radial-gradient(circle at 35% 35%, #fff3e0 0%, #ff6d00 50%, #e65100 100%);
+  color: #ff6d00;
+  box-shadow: 0 0 6px #ff6d00, 0 0 14px #e65100;
+}
+
+.dp-hlight--pink b {
+  background: radial-gradient(circle at 35% 35%, #fce4ec 0%, #f50057 50%, #880e4f 100%);
+  color: #f50057;
+  box-shadow: 0 0 6px #f50057, 0 0 14px #880e4f;
+}
+
+.dp-hlight--a b { animation: dp-twinkle-a 1.3s ease-in-out infinite; }
+.dp-hlight--b b { animation: dp-twinkle-b 1.3s ease-in-out infinite; }
+.dp-hlight--c b { animation: dp-twinkle-c 1.7s ease-in-out infinite; }
+
+.dp-hlight__flower {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  margin-top: 1px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: radial-gradient(circle at 38% 33%, #ffdf73, #ff8d35 55%, #bd3110 95%);
+  box-shadow: inset 1px 1px 2px rgba(255, 242, 167, 0.7), 0 0 5px rgba(255, 146, 41, 0.45);
+}
+
+.dp-hlight__flower::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border: 1px dotted #ffd171;
+  border-radius: 50%;
+}
+
+@keyframes dp-twinkle-a {
+  0%, 100% { opacity: 1; filter: brightness(1.3) drop-shadow(0 0 5px currentColor); transform: scale(1); }
+  50% { opacity: 0.3; filter: brightness(0.5); transform: scale(0.92); }
+}
+
+@keyframes dp-twinkle-b {
+  0%, 100% { opacity: 0.3; filter: brightness(0.5); transform: scale(0.92); }
+  50% { opacity: 1; filter: brightness(1.3) drop-shadow(0 0 5px currentColor); transform: scale(1); }
+}
+
+@keyframes dp-twinkle-c {
+  0%, 100% { opacity: 0.85; filter: brightness(1); }
+  30% { opacity: 0.2; filter: brightness(0.4); }
+  70% { opacity: 1; filter: brightness(1.5) drop-shadow(0 0 8px currentColor); }
+}
+
+@media (max-width: 749px) {
+  .dp-header-lights { bottom: -13px; height: 15px; }
+  .dp-hlight b { width: 7.5px; height: 11px; }
+  .dp-hlight i { width: 3.5px; height: 2.5px; }
+  .dp-hlight__flower { width: 8px; height: 8px; }
+}
+
+/* Subtle Diwali lights on the announcement bar. Text and logo stay untouched. */
+.cms-top-header .topbar {
+  position: relative;
+}
+
+.cms-top-header .topbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, rgba(255, 236, 180, 0.95) 1.4px, rgba(255, 186, 60, 0.35) 2.4px, transparent 3.4px) 0 78% / 36px 100% repeat-x;
+  opacity: 0.55;
+  animation: dp-marquee-lights 2.8s ease-in-out infinite;
+}
+
+@keyframes dp-marquee-lights {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.7; }
+}
+
+.dp-diwali-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 680px;
+  margin: 0;
+  background: radial-gradient(ellipse 100% 90% at 50% 38%, #fffaf4 0%, #fff1dc 58%, #f8e4c4 100%);
+}
+
+.dp-diwali-hero__florals {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.dp-diwali-hero__florals i {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s);
+  height: var(--s);
+  margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+  opacity: 0.72;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='%23f0c56a'%3E%3Cellipse cx='50' cy='18' rx='11' ry='16'/%3E%3Cellipse cx='50' cy='18' rx='11' ry='16' transform='rotate(45 50 50)'/%3E%3Cellipse cx='50' cy='18' rx='11' ry='16' transform='rotate(90 50 50)'/%3E%3Cellipse cx='50' cy='18' rx='11' ry='16' transform='rotate(135 50 50)'/%3E%3Cellipse cx='50' cy='18' rx='11' ry='16' transform='rotate(180 50 50)'/%3E%3Cellipse cx='50' cy='18' rx='11' ry='16' transform='rotate(225 50 50)'/%3E%3Cellipse cx='50' cy='18' rx='11' ry='16' transform='rotate(270 50 50)'/%3E%3Cellipse cx='50' cy='18' rx='11' ry='16' transform='rotate(315 50 50)'/%3E%3Ccircle cx='50' cy='50' r='9'/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat;
+  animation: dp-spin var(--t, 28s) linear infinite;
+}
+
+.dp-diwali-hero__florals i:nth-child(even) {
+  animation-direction: reverse;
+  opacity: 0.5;
+}
+
+.dp-diwali-hero__wire {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 86px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.dp-diwali-hero__wire circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.9));
+  animation: dp-bulb 1.8s ease-in-out infinite;
+}
+
+.dp-diwali-hero__wire circle:nth-child(2n) { animation-duration: 2.4s; animation-delay: -0.6s; }
+.dp-diwali-hero__wire circle:nth-child(3n) { animation-duration: 1.35s; animation-delay: -1.1s; }
+.dp-diwali-hero__wire circle:nth-child(4n) { animation-delay: -0.3s; }
+
+@keyframes dp-bulb {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.dp-diwali-hero__hangers {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+.dp-diya {
+  position: absolute;
+  left: var(--x);
+  top: 16px;
+  z-index: 1;
+  width: 46px;
+  margin-left: -23px;
+  pointer-events: none;
+  animation: dp-drop 1.7s cubic-bezier(.16, .84, .28, 1.02) var(--drop, 0.1s) both;
+}
+
+.dp-diya__fall {
+  display: block;
+  transform-origin: top center;
+  animation: dp-sway 4.6s ease-in-out var(--delay, 0s) infinite;
+}
+
+@keyframes dp-drop {
+  0% { transform: translateY(-620px); }
+  78% { transform: translateY(14px); }
+  100% { transform: translateY(0); }
+}
+
+.dp-diya__cord {
+  display: block;
+  position: relative;
+  width: 1px;
+  height: var(--len, 80px);
+  margin: 0 auto;
+  background: linear-gradient(#ffe7a3, #c4842a);
+}
+
+.dp-diya__bulbs {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin: 2px 0 5px;
+}
+
+.dp-diya__bulbs i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--b);
+  box-shadow: 0 0 8px 2px var(--b);
+  animation: dp-bulb 1.15s ease-in-out var(--d, 0s) infinite;
+}
+
+.dp-diya__lamp {
+  position: relative;
+  display: block;
+  width: 34px;
+  height: 16px;
+  margin: 8px auto 0;
+  border-radius: 2px 2px 16px 16px;
+  background: linear-gradient(180deg, #f0c07a 0%, #d4843a 42%, #a24d1c 100%);
+  box-shadow:
+    inset 0 3px 0 #ffe1ad,
+    0 7px 12px rgba(120, 42, 8, 0.22);
+}
+
+.dp-diya__lamp::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  top: -2px;
+  height: 7px;
+  border-radius: 8px;
+  background: linear-gradient(#ffe7bf, #e7b56a);
+}
+
+.dp-diya__flame {
+  position: absolute;
+  left: 50%;
+  top: -16px;
+  width: 9px;
+  height: 16px;
+  margin-left: -4.5px;
+  border-radius: 50% 50% 46% 46%;
+  background: radial-gradient(circle at 50% 78%, #fff6c4 0 3px, #ffc53a 4px, #ff6a00 8px, transparent 10px);
+  transform-origin: center bottom;
+  filter: drop-shadow(0 0 6px rgba(255, 150, 30, 0.95));
+  animation: dp-flame 0.55s ease-in-out infinite;
+}
+
+.dp-diya--bridge {
+  top: 548px;
+  bottom: auto;
+  left: 50%;
+  width: 148px;
+  margin-left: -74px;
+}
+
+.dp-diya--bridge .dp-diya__fall { animation: none; }
+.dp-diya--bridge .dp-diya__cord { display: none; }
+
+.dp-diya--bridge .dp-diya__bulbs {
+  gap: 9px;
+  margin-bottom: 8px;
+}
+
+.dp-diya--bridge .dp-diya__bulbs i {
+  width: 10px;
+  height: 10px;
+}
+
+.dp-diya--bridge .dp-diya__lamp {
+  width: 42px;
+  height: 18px;
+}
+
+@keyframes dp-flame {
+  0%, 100% { transform: scale(1, 1) rotate(-2deg); }
+  50% { transform: scale(0.82, 1.18) rotate(2deg); }
+}
+
+.dp-hang {
+  position: absolute;
+  left: var(--x);
+  top: 18px;
+  z-index: var(--z, 2);
+  width: var(--jar, 140px);
+  line-height: 0;
+  touch-action: manipulation;
+  animation: dp-drop 1.7s cubic-bezier(.16, .84, .28, 1.02) var(--drop, 0.12s) both;
+}
+
+.dp-hang__fall {
+  display: block;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  animation: dp-sway var(--dur, 3.8s) ease-in-out var(--delay, 0s) infinite;
+}
+
+.dp-hang__cord {
+  display: block;
+  width: 2px;
+  height: var(--len, 40px);
+  margin: 0 auto 2px;
+  background: linear-gradient(#f6d78a, #a56b16);
+  position: relative;
+}
+
+.dp-hang__cord::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: #ffe7a3;
+  box-shadow: 0 0 8px #ffd56a;
+}
+
+.dp-hang__cord::after,
+.dp-diya__cord::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  bottom: 2px;
+  width: 12px;
+  margin-left: -6px;
+  background-image:
+    radial-gradient(circle at 50% 6px, #fff 0 1.3px, #ff3b3b 1.6px 3.4px, rgba(255, 59, 59, 0.55) 3.6px 6px, transparent 7px),
+    radial-gradient(circle at 50% 6px, #fff 0 1.3px, #ffd23b 1.6px 3.4px, rgba(255, 210, 59, 0.55) 3.6px 6px, transparent 7px),
+    radial-gradient(circle at 50% 6px, #fff 0 1.3px, #2fbe57 1.6px 3.4px, rgba(47, 190, 87, 0.5) 3.6px 6px, transparent 7px),
+    radial-gradient(circle at 50% 6px, #fff 0 1.3px, #3b78ff 1.6px 3.4px, rgba(59, 120, 255, 0.5) 3.6px 6px, transparent 7px),
+    radial-gradient(circle at 50% 6px, #fff 0 1.3px, #e23bff 1.6px 3.4px, rgba(226, 59, 255, 0.45) 3.6px 6px, transparent 7px);
+  background-size: 12px 70px;
+  background-repeat: repeat-y;
+  background-position: 0 0, 0 14px, 0 28px, 0 42px, 0 56px;
+  animation: dp-bulb 1.35s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.dp-hang:nth-child(3n) .dp-hang__cord::after,
+.dp-diya:nth-child(3n) .dp-diya__cord::after { animation-delay: -0.45s; }
+
+.dp-hang:nth-child(4n) .dp-hang__cord::after,
+.dp-diya:nth-child(4n) .dp-diya__cord::after { animation-delay: -0.9s; }
+
+.dp-jar3d {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.dp-hang img {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: transparent;
+  filter: drop-shadow(0 12px 10px rgba(90, 32, 8, 0.16));
+}
+
+.dp-jar3d.is-spinning img {
+  visibility: hidden;
+}
+
+.dp-hang.is-spun::after {
+  content: "Tap again to view";
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  color: #8f0c0f;
+  font-family: var(--font-family, Georgia, "Times New Roman", serif);
+}
+
+.dp-jar3d__spin {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.dp-jar3d.is-spinning .dp-jar3d__spin {
+  filter: drop-shadow(0 16px 7px rgba(70, 28, 8, 0.3));
+}
+
+@keyframes dp-sway {
+  0%, 100% { transform: rotate(-3.6deg); }
+  50% { transform: rotate(3.6deg); }
+}
+
+.dp-diwali-hero__focus {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 64px;
+  width: 460px;
+  height: 460px;
+  margin-left: -230px;
+}
+
+.dp-medal {
+  --r: 154px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.dp-medal__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+  animation: dp-spin 18s linear infinite;
+  filter: drop-shadow(0 10px 16px rgba(40, 0, 10, 0.35));
+}
+
+.dp-medal__face {
+  position: absolute;
+  inset: 19%;
+  z-index: 2;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: radial-gradient(circle at 50% 42%, #fff6b0 0%, #ffe14a 58%, #f0b800 100%);
+  box-shadow: inset 0 0 0 3px #e8b423, inset 0 0 24px rgba(255, 255, 255, 0.35);
+}
+
+.dp-medal__ornament {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 148px;
+  height: 18px;
+  margin: 4px 0;
+}
+
+.dp-medal__ornament svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.dp-medal__ornament--flip { transform: scaleY(-1); }
+
+@keyframes dp-badge-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.035); }
+}
+
+@keyframes dp-spin {
+  to { transform: rotate(360deg); }
+}
+
+.dp-diwali-hero__title,
+.dp-diwali-hero__sub {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--font-family, Georgia, "Times New Roman", serif);
+  color: #3c1020;
+}
+
+.dp-diwali-hero__title {
+  font-size: 58px;
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+}
+
+.dp-diwali-hero__sub {
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.dp-diwali-offers {
+  position: relative;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  background: #8f0c0f;
+  color: #fff;
+}
+
+.dp-diwali-offers__item {
+  flex: 1 1 0;
+  max-width: 360px;
+  padding: 16px 18px;
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.dp-diwali-offers__item:last-child { border-right: 0; }
+
+.dp-diwali-offers strong,
+.dp-diwali-offers span {
+  display: block;
+  font-family: var(--font-family, Georgia, "Times New Roman", serif);
+}
+
+.dp-diwali-offers strong {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.dp-diwali-offers span {
+  margin-top: 3px;
+  color: #f6d78a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.dp-diwali-card {
+  position: absolute;
+  z-index: 5;
+  margin: 0;
+  max-width: 168px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #fffdf8;
+  color: #8f0c0f;
+  border: 1.5px solid #e2a322;
+  box-shadow: 0 8px 18px rgba(143, 12, 15, 0.12);
+  font-family: var(--font-family, Georgia, "Times New Roman", serif);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  pointer-events: none;
+  animation: dp-pop 7.8s ease-in-out infinite;
+}
+
+.dp-diwali-card--a { left: -168px; top: 18px; }
+.dp-diwali-card--b { right: -176px; top: 108px; animation-delay: -2.6s; }
+.dp-diwali-card--c { left: -40px; bottom: -18px; animation-delay: -5.2s; }
+
+@keyframes dp-pop {
+  0% { opacity: 0; transform: translateY(12px) scale(0.7); }
+  7% { opacity: 1; transform: translateY(0) scale(1.06); }
+  12% { opacity: 1; transform: translateY(0) scale(1); }
+  30% { opacity: 1; transform: translateY(0) scale(1); }
+  38% { opacity: 0; transform: translateY(-10px) scale(0.86); }
+  100% { opacity: 0; transform: translateY(-10px) scale(0.86); }
+}
+
+@media (max-width: 1399px) {
+  .dp-diwali-hero {
+    min-height: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .dp-diwali-hero__wire { height: 78px; z-index: 4; }
+
+  .dp-diwali-hero__focus {
+    position: absolute;
+    left: 50%;
+    top: 48px;
+    order: 0;
+    width: min(320px, 48vw);
+    height: min(320px, 48vw);
+    margin: 0 0 0 calc(min(320px, 48vw) / -2);
+    z-index: 5;
+  }
+
+  .dp-diwali-hero__hangers {
+    position: relative;
+    inset: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+    padding: 8px 16px 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .dp-diwali-hero__hangers::-webkit-scrollbar { display: none; }
+
+  .dp-hang {
+    position: relative;
+    left: auto;
+    top: auto;
+    flex: 0 0 120px;
+    width: 120px;
+    scroll-snap-align: center;
+  }
+
+  .dp-hang__cord { height: 440px; }
+
+  .dp-hang__cord::after,
+  .dp-diya__cord::after {
+    width: 12px;
+    margin-left: -6px;
+    background-size: 12px 70px;
+  }
+
+  .dp-diya,
+  .dp-diya--bridge {
+    position: relative;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    display: block;
+    flex: 0 0 50px;
+    width: 50px;
+    margin: 0;
+    scroll-snap-align: center;
+  }
+
+  .dp-diya__cord,
+  .dp-diya--bridge .dp-diya__cord {
+    display: block;
+    height: 380px;
+  }
+
+  .dp-diya__bulbs { display: none; }
+
+  .dp-medal__ornament { width: 90px; height: 12px; }
+  .dp-diwali-hero__title { font-size: clamp(30px, 4vw, 42px); }
+  .dp-diwali-hero__sub { font-size: 11px; letter-spacing: 0.14em; }
+  .dp-diwali-offers { order: 3; margin-top: 8px; }
+  .dp-diwali-offers strong { font-size: 13px; }
+  .dp-diwali-offers span { font-size: 10px; }
+  .dp-diwali-offers__item { padding: 10px 6px; }
+  .dp-diwali-card { display: none; }
+}
+
+@media (max-width: 749px) {
+  .dp-diwali-hero__wire { height: 70px; z-index: 4; }
+
+  .dp-diwali-hero__focus {
+    position: absolute;
+    left: 50%;
+    top: 52px;
+    width: min(200px, 56vw);
+    height: min(200px, 56vw);
+    margin: 0 0 0 calc(min(200px, 56vw) / -2);
+    z-index: 5;
+  }
+
+  .dp-diwali-hero__title { font-size: 26px; }
+  .dp-diwali-hero__sub { font-size: 8px; letter-spacing: 0.1em; }
+  .dp-medal__ornament { width: 70px; height: 10px; margin: 1px 0; }
+
+  .dp-diwali-hero__hangers {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0;
+    padding: 6px 10px 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .dp-diwali-hero__hangers::-webkit-scrollbar { display: none; }
+
+  .dp-hang {
+    flex: 0 0 92px;
+    width: 92px;
+  }
+
+  .dp-hang__cord { height: 330px; }
+
+  .dp-hang__cord::after,
+  .dp-diya__cord::after {
+    width: 12px;
+    margin-left: -6px;
+    background-size: 12px 70px;
+  }
+
+  .dp-diya,
+  .dp-diya--bridge {
+    display: block;
+    flex: 0 0 44px;
+    width: 44px;
+  }
+
+  .dp-diya__cord,
+  .dp-diya--bridge .dp-diya__cord {
+    display: block;
+    height: 280px;
+  }
+
+  .dp-diya__bulbs { display: none; }
+
+  .dp-diwali-offers strong { font-size: 12px; }
+  .dp-diwali-offers span { font-size: 9px; line-height: 1.25; }
+  .dp-diwali-offers__item { padding: 10px 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cms-top-header .topbar::after,
+  .dp-hlight b,
+  .dp-diwali-hero__wire circle,
+  .dp-hang__cord::after,
+  .dp-diya__cord::after,
+  .dp-hang,
+  .dp-hang__fall,
+  .dp-diya,
+  .dp-diya__fall,
+  .dp-diwali-hero__florals i,
+  .dp-diya__bulbs i,
+  .dp-diya__flame,
+  .dp-medal__ring,
+  .dp-medal__face,
+  .dp-diwali-card {
+    animation: none;
+  }
+
+  .dp-diwali-card { opacity: 1; transform: none; }
+}
+
+@media print {
+  .dp-diwali-hero,
+  .cms-top-header .topbar::after { display: none !important; }
+}
