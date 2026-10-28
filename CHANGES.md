@@ -138,4 +138,15 @@ Pushing `layout/theme.liquid` for GSC first-wave SEO overwrote the live-only Diw
 
 ---
 
+## 🖼️ Image Grid Feature Tiles Fix (28 Oct 2026)
+
+Homepage Images-grid section (Traditional Recipes / 100% Natural / Freshly Packed) showed blank white tiles with emoji titles only.
+
+**Cause:** Live `snippets/image-item.liquid` deferred backgrounds to `data-dp-bg` and only set inline `background-image` in theme `design_mode`. No storefront JS applied `data-dp-bg`, so images never painted (timeout / blank).
+
+**Fix:** Always emit inline `background-image: url(...)` via `image_url: width: 1200`. Pushed to live theme `#161791869142`.
+
+---
+
 *Last Updated: October 28, 2026*
+
