@@ -1,0 +1,38 @@
+{% comment %}
+  Picks the next Indian festival sale end-date after "now".
+  Outputs:
+    dp_festival_name  — e.g. Diwali
+    dp_festival_label — e.g. Diwali Sale
+    dp_festival_y / dp_festival_m / dp_festival_d
+    dp_festival_found — true/false
+  Keep this list updated every few years (lunar festivals shift).
+{% endcomment %}
+{%- liquid
+  assign dp_festival_found = false
+  assign dp_festival_name = ''
+  assign dp_festival_label = ''
+  assign dp_festival_y = ''
+  assign dp_festival_m = ''
+  assign dp_festival_d = ''
+  assign now_s = 'now' | date: '%s' | plus: 0
+
+  assign festival_calendar = '2025-01-14|Makar Sankranti,2025-01-26|Republic Day,2025-03-14|Holi,2025-08-15|Independence Day,2025-10-02|Navratri,2025-10-20|Diwali,2025-12-31|New Year,2026-01-14|Makar Sankranti,2026-01-26|Republic Day,2026-03-03|Holi,2026-08-15|Independence Day,2026-10-11|Navratri,2026-11-08|Diwali,2026-12-31|New Year,2027-01-14|Makar Sankranti,2027-01-26|Republic Day,2027-03-22|Holi,2027-08-15|Independence Day,2027-10-01|Navratri,2027-10-29|Diwali,2027-12-31|New Year,2028-01-14|Makar Sankranti,2028-01-26|Republic Day,2028-03-11|Holi,2028-08-15|Independence Day,2028-09-19|Navratri,2028-10-17|Diwali,2028-12-31|New Year,2029-01-14|Makar Sankranti,2029-01-26|Republic Day,2029-03-01|Holi,2029-08-15|Independence Day,2029-10-08|Navratri,2029-11-05|Diwali,2029-12-31|New Year,2030-01-14|Makar Sankranti,2030-01-26|Republic Day,2030-03-20|Holi,2030-08-15|Independence Day,2030-09-28|Navratri,2030-10-26|Diwali,2030-12-31|New Year,2031-01-14|Makar Sankranti,2031-01-26|Republic Day,2031-03-09|Holi,2031-08-15|Independence Day,2031-09-17|Navratri,2031-11-14|Diwali,2031-12-31|New Year'
+
+  assign festival_rows = festival_calendar | split: ','
+  for row in festival_rows
+    assign parts = row | split: '|'
+    assign f_date = parts[0] | strip
+    assign f_name = parts[1] | strip
+    assign f_end_s = f_date | append: ' 23:59:59' | date: '%s' | plus: 0
+    if f_end_s > now_s
+      assign dp_festival_found = true
+      assign dp_festival_name = f_name
+      assign dp_festival_label = f_name | append: ' Sale'
+      assign date_bits = f_date | split: '-'
+      assign dp_festival_y = date_bits[0]
+      assign dp_festival_m = date_bits[1] | plus: 0
+      assign dp_festival_d = date_bits[2] | plus: 0
+      break
+    endif
+  endfor
+-%}

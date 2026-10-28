@@ -3,22 +3,59 @@
   assign sett_equal = section.settings.use_eq_height
   assign ck = section.settings.use_eq_height
   assign url = section.settings.button_link
-%}
+  assign auto_festival = section.settings.auto_festival_countdown
+  if auto_festival == nil
+    assign auto_festival = true
+  endif
+
+  assign cd_year = section.settings.year_count_down | plus: 0
+  assign cd_month = section.settings.month_count_down | plus: 0
+  assign cd_day = section.settings.day_count_down | plus: 0
+  assign banner_subtitle = section.settings.subtitle
+-%}
+
+{%- if auto_festival -%}
+  {%- comment -%} include (not render) so festival assigns are visible in this section {%- endcomment -%}
+  {%- include 'dp-next-festival' -%}
+  {%- if dp_festival_found -%}
+    {%- assign cd_year = dp_festival_y | plus: 0 -%}
+    {%- assign cd_month = dp_festival_m | plus: 0 -%}
+    {%- assign cd_day = dp_festival_d | plus: 0 -%}
+    {%- assign banner_subtitle = dp_festival_label -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- liquid
+  assign show_countdown = false
+  if cd_year > 0 and cd_month > 0 and cd_day > 0
+    assign cd_end = cd_year | append: '-' | append: cd_month | append: '-' | append: cd_day | append: ' 23:59:59'
+    assign cd_end_s = cd_end | date: '%s' | plus: 0
+    assign now_s = 'now' | date: '%s' | plus: 0
+    if cd_end_s > now_s
+      assign show_countdown = true
+    endif
+  endif
+  if show_countdown
+    assign copy_col = 'col-12 col-md-6 col-lg-6'
+  else
+    assign copy_col = 'col-12'
+  endif
+-%}
 
 {%- for i in (1..1) -%}
-  <section id="laber_{{sid}}" class="laber_product-countdown-banner_{{sid}}">
+  <section id="laber_{{sid}}" class="laber_product-countdown-banner_{{sid}}" data-dp-festival="{% if auto_festival and dp_festival_found %}{{ dp_festival_name | escape }}{% endif %}">
     <div class="container">
       <div class="laber_countdown_banner">
         <div class="row align-items-center">
           {%- assign url = section.settings.button_link -%}
-          <div class="product_count_down col-12 col-md-6 col-lg-6">
+          <div class="product_count_down {{ copy_col }}">
             <div class="content-countdown">
               <div class="product-inner">
-                {% if section.settings.title != blank or section.settings.sub_title != blank %}
+                {% if section.settings.title != blank or banner_subtitle != blank %}
                   <div class="wrap_title m-lg-0">
-                    {% if section.settings.subtitle != blank %}
+                    {% if banner_subtitle != blank %}
                       <p class="subtitles mb-2">
-                        {{ section.settings.subtitle }}
+                        {{ banner_subtitle }}
                       </p>
                     {% endif %}
                     {% if section.settings.title != blank %}
@@ -47,22 +84,22 @@
               </div>
             </div>
           </div>
+          {%- if show_countdown -%}
           <div class="product_count_down col-12 col-md-6 col-lg-6">
             <div class="content-countdown">
               <div class="alo-countdown  text-center text-lg-end">
-                {%- if section.settings.year_count_down != blank and section.settings.month_count_down != blank and section.settings.day_count_down != blank -%}
                   <div
                     class="cms-countdown"
-                    data-y="{{section.settings.year_count_down}}"
-                    data-m="{{section.settings.month_count_down}}"
-                    data-d="{{section.settings.day_count_down}}"
+                    data-y="{{ cd_year }}"
+                    data-m="{{ cd_month }}"
+                    data-d="{{ cd_day }}"
                     data-h="00"
                     data-i="00"
                     data-s="00"></div>
-                {%- endif -%}
               </div>
             </div>
           </div>
+          {%- endif -%}
         </div>
       </div>
     </div>
@@ -91,23 +128,32 @@
         "default": "#fff"
       },
       {
+        "type": "checkbox",
+        "id": "auto_festival_countdown",
+        "label": "Auto set date from next festival",
+        "default": true,
+        "info": "Uses the next Indian festival (Diwali, Holi, Navratri, etc.) as the countdown end. Subtitle becomes \"{Festival} Sale\"."
+      },
+      {
         "type": "text",
         "id": "subtitle",
-        "label": "Subtitle"
+        "label": "Subtitle (manual)",
+        "info": "Used only when Auto festival is off"
       }, {
         "type": "text",
         "id": "year_count_down",
-        "label": "Year of countdown",
-        "default": "2021"
+        "label": "Year of countdown (manual)",
+        "default": "2021",
+        "info": "Ignored when Auto festival is on"
       }, {
         "type": "text",
         "id": "month_count_down",
-        "label": "Month of countdown",
+        "label": "Month of countdown (manual)",
         "default": "12"
       }, {
         "type": "text",
         "id": "day_count_down",
-        "label": "Day of countdown",
+        "label": "Day of countdown (manual)",
         "default": "30"
       }, {
         "type": "text",

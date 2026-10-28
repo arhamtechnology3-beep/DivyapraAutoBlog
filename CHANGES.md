@@ -153,5 +153,17 @@ Pushed to live theme `#161791869142`.
 
 ---
 
+## ⏱️ Festival Countdown Auto-Date + "Timeout" Fix (28 Oct 2026)
+
+Homepage `product-countdown-banner` (`9db669ec…`) showed literal **Timeout** on the right because the end date was **2026-07-15** (already past). The theme countdown plugin replaces the timer with `products.countdown.timeout` when expired.
+
+**Fix:**
+- **Auto festival dates** via `snippets/dp-next-festival.liquid` (Diwali, Holi, Navratri, Independence Day, Makar Sankranti, Republic Day, New Year through 2031). Section setting `auto_festival_countdown` (default on) sets the countdown end to the next festival and subtitle to `{Festival} Sale`.
+- Demo copy "Spring Sale / Feeder Brushes" → pickle combo offer
+- Section Liquid skips the countdown column when the end date is already past
+- JS skips init / hides the column for past dates; `timeout` option cleared; CSS hides `.timeout` as a fallback
+
+---
+
 *Last Updated: October 28, 2026*
 

@@ -2683,11 +2683,17 @@ var AloReference = (function Alo($){
                       mm     = Number($counter.data('m').toString().replace("mm", new Date().getMonth() + 1)),
                       dd     = Number($counter.data('d').toString().replace("dd", new Date().getDate() + 1));
                   var austDay = new Date(year, mm -1 , dd, $counter.data('h'), $counter.data('i'), $counter.data('s')); // the month is 0-indexed
+                  // Skip past dates — plugin would paint "Timeout" on the right of sale banners.
+                  if (austDay.getTime() <= Date.now()) {
+                      $counter.closest('.product_count_down').hide();
+                      $counter.addClass('init is-expired');
+                      return;
+                  }
                   $counter.countdown({
                       until: austDay,
                       labels: labels,
                       layout: layout,
-                      timeout : '<span class="timeout">{{ 'products.countdown.timeout' | t }}</span>'
+                      timeout : ''
                   });
                   $counter.addClass('init');
               });

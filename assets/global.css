@@ -1909,6 +1909,12 @@ a.btn:hover,
   color: var(--color-secondary);
 }
 
+/* Hide expired countdown "Timeout" text if the plugin still emits it */
+.laber_countdown_banner .cms-countdown .timeout,
+.cms-countdown span.timeout {
+  display: none !important;
+}
+
 .laber_countdown_banner .cms-countdown {
   display: inline-flex;
   gap: clamp(24px, 2.5vw, 96px);
