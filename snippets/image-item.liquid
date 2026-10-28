@@ -4,6 +4,7 @@
   assign bg_color = block.settings.bg_color | default: '#00A850'
   assign url = block.settings.btn_link | default: '#'
   assign open_link = block.settings.open_link
+  assign tile_alt = block.settings.title | default: 'Featured image' | strip_html | escape
 -%}
 <div
   id="bk_{{block.id}}"
@@ -11,28 +12,37 @@
   style="margin-bottom:{{ block.settings.mg_bottom }}px;"
   {{ block.shopify_attributes }}>
   <a href="{{ url }}"{% if open_link == '_blank' %} target="_blank" rel="noopener"{% endif %}>
-    <div class="image_grid_item  rounded-4 adjust-height"
+    <div class="image_grid_item rounded-4 adjust-height{% if bg_image != blank %} has-dp-tile-img{% endif %}"
          style="background-color: {{ bg_color }};
          {% if bg_image != blank %}
            background-image: url('{{ bg_image | image_url: width: 1200 }}');
            background-size: cover;
            background-position: center;
          {% endif %}">
+      {% if bg_image != blank %}
+        <img
+          class="dp-tile-img"
+          src="{{ bg_image | image_url: width: 1200 }}"
+          srcset="{{ bg_image | image_url: width: 600 }} 600w, {{ bg_image | image_url: width: 900 }} 900w, {{ bg_image | image_url: width: 1200 }} 1200w"
+          sizes="(max-width: 767px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          alt="{{ tile_alt }}"
+          width="{{ bg_image.width | default: 1200 }}"
+          height="{{ bg_image.height | default: 800 }}"
+          loading="lazy"
+          decoding="async">
+      {% endif %}
       <div class="content-image h-100 flex h_{{block.settings.h_position}} v_{{block.settings.v_position}} text_{{block.settings.txt_align}}">
         <div class="content">
-          <!-- Subtitle -->
           {% if block.settings.subtitle != blank %}
             <p class="subtitle-bg mb-1 mb-lg-2">
               {{ block.settings.subtitle }}
             </p>
           {% endif %}
-          <!-- Title -->
           {% if block.settings.title != blank %}
             <h4 class="title mb-15 sm:mb-10 md:mb-10" style="color:{{ block.settings.cl_title }};">
               {{ block.settings.title }}
             </h4>
           {% endif %}
-          <!-- Content -->
           {% if block.settings.content != blank %}
             <p class="cnt mb-15 sm:mb-10 md:mb-10" style="color:{{ block.settings.cl_content }};">
               {{ block.settings.content }}
@@ -40,7 +50,6 @@
           {% endif %}
         </div>
       </div>
-
     </div>
   </a>
 </div>

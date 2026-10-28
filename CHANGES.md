@@ -144,7 +144,12 @@ Homepage Images-grid section (Traditional Recipes / 100% Natural / Freshly Packe
 
 **Cause:** Live `snippets/image-item.liquid` deferred backgrounds to `data-dp-bg` and only set inline `background-image` in theme `design_mode`. No storefront JS applied `data-dp-bg`, so images never painted (timeout / blank).
 
-**Fix:** Always emit inline `background-image: url(...)` via `image_url: width: 1200`. Pushed to live theme `#161791869142`.
+**Fix:**
+1. Always emit inline `background-image: url(...)` via `image_url: width: 1200`.
+2. Also render a real `<img class="dp-tile-img">` with `object-fit: cover` so photos paint even if CSS backgrounds fail.
+3. Tile fallback `bg_color` set to `#2a1810` (was transparent) in `templates/index.json`.
+
+Pushed to live theme `#161791869142`.
 
 ---
 

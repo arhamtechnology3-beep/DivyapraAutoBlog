@@ -7793,6 +7793,28 @@ a.btn:hover,
   height: clamp(270px, 20.833vw, 420px);
 }
 
+/* Feature tiles: real <img> layer so photos paint even if CSS backgrounds fail */
+.image-grid-section .image_grid_item.has-dp-tile-img {
+  position: relative;
+  overflow: hidden;
+}
+.image-grid-section .image_grid_item.has-dp-tile-img > .dp-tile-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+}
+.image-grid-section .image_grid_item.has-dp-tile-img > .content-image {
+  position: relative;
+  z-index: 1;
+}
+
+
 @media (max-width: 567px) {
   .shop-page .pagination {
     float: none;

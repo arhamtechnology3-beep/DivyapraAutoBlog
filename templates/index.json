@@ -641,7 +641,7 @@
         "template--21324546343230__79417091-7f3f-43bb-b035-db1e4988e824-image-1": {
           "type": "image",
           "settings": {
-            "bg_color": "rgba(0,0,0,0)",
+            "bg_color": "#2a1810",
             "bg_image": "shopify://shop_images/Traditional_Recipes.webp",
             "btn_link": "shopify://products/chana-keri-methi-pickle-gujarati-methia-achar",
             "open_link": "_blank",
@@ -659,7 +659,7 @@
         "template--21324546343230__79417091-7f3f-43bb-b035-db1e4988e824-image-2": {
           "type": "image",
           "settings": {
-            "bg_color": "rgba(0,0,0,0)",
+            "bg_color": "#2a1810",
             "bg_image": "shopify://shop_images/100_Natural_Ingredients.webp",
             "btn_link": "shopify://products/aachar-masala-ready-pickle-mix-gujarati-methia-sambhar",
             "open_link": "_blank",
@@ -677,7 +677,7 @@
         "template--21324546343230__79417091-7f3f-43bb-b035-db1e4988e824-image-3": {
           "type": "image",
           "settings": {
-            "bg_color": "rgba(0,0,0,0)",
+            "bg_color": "#2a1810",
             "bg_image": "shopify://shop_images/Freshly_Packed_Delivered1.webp",
             "btn_link": "shopify://collections/all",
             "open_link": "_blank",
